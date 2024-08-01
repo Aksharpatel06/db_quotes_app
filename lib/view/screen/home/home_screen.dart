@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
+import 'package:icon_decoration/icon_decoration.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
 import 'package:stroke_text/stroke_text.dart';
@@ -134,30 +135,33 @@ class HomeScreen extends StatelessWidget {
                     bottom: 50, // Adjust this value as needed
                     left: 100,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         IconButton(
-                          onPressed: () {
-                            quotesController.favoriteQuotes();
-                          },
-                          icon: Icon(
-                            quotesController
-                                    .quotesRandomList[
-                                        quotesController.screenIndex.value]
-                                    .isLiked
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            size: 45,
-                            color: quotesController
-                                    .quotesRandomList[
-                                        quotesController.screenIndex.value]
-                                    .isLiked
-                                ? Colors.redAccent
-                                : Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 25,
-                        ),
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              quotesController.favoriteQuotes();
+                            },
+                            icon: DecoratedIcon(
+                              icon: Icon(
+                                quotesController
+                                        .quotesRandomList[
+                                            quotesController.screenIndex.value]
+                                        .isLiked
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: quotesController
+                                        .quotesRandomList[
+                                            quotesController.screenIndex.value]
+                                        .isLiked
+                                    ? Colors.redAccent
+                                    : Colors.white,
+                                size: 40,
+                              ),
+                              decoration: IconDecoration(
+                                  border: IconBorder(
+                                      color: Colors.black, width: 2)),
+                            )),
                         IconButton(
                           onPressed: () async {
                             final boundary = quotesController
@@ -189,19 +193,15 @@ class HomeScreen extends StatelessWidget {
                               }
                             }
                           },
-                          icon: const Icon(
-                            Icons.ios_share,
-                            size: 45,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 25,
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.collections,
-                            size: 45,
+                          icon: DecoratedIcon(
+                            icon: Icon(
+                              Icons.share,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            decoration: IconDecoration(
+                                border:
+                                    IconBorder(color: Colors.black, width: 2)),
                           ),
                         ),
                       ],
