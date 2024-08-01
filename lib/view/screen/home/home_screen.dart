@@ -132,10 +132,9 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                   Positioned(
-                    bottom: 50, // Adjust this value as needed
+                    bottom: 100, // Adjust this value as needed
                     left: 100,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         IconButton(
                             padding: EdgeInsets.zero,
@@ -162,6 +161,9 @@ class HomeScreen extends StatelessWidget {
                                   border: IconBorder(
                                       color: Colors.black, width: 2)),
                             )),
+                        SizedBox(
+                          width: 100,
+                        ),
                         IconButton(
                           onPressed: () async {
                             final boundary = quotesController
