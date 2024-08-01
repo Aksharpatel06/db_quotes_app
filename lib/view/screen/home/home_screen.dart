@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 
 import 'package:db_quotes_app/view/controller/quotes_controller.dart';
 import 'package:db_quotes_app/view/screen/category/category_screen.dart';
+import 'package:db_quotes_app/view/screen/favorite/favorite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -36,7 +37,11 @@ class HomeScreen extends StatelessWidget {
           children: [
             SpeedDialChild(
               shape: const CircleBorder(),
-              onTap: () {},
+              onTap: () {
+                Get.to(() => const FavouriteQuoteScreen(),
+                    duration: const Duration(milliseconds: 500),
+                    transition: Transition.upToDown);
+              },
               child: const Icon(Icons.favorite_border),
             ),
             SpeedDialChild(
@@ -44,7 +49,7 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Get.to(() => const CategoryScreen(),
                     duration: const Duration(milliseconds: 500),
-                    transition: Transition.leftToRight);
+                    transition: Transition.downToUp);
               },
               child: const Icon(Icons.category),
             ),

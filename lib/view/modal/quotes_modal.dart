@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 class QuotesModal {
   String quote, author, category;
-  int  index;
+  int index;
   bool isLiked;
   String img;
   GlobalKey imgKey;
@@ -20,12 +19,13 @@ class QuotesModal {
 
   factory QuotesModal(Map json, int index) {
     return QuotesModal._(
-      quote: json['quote'],
+      quote: json['quote'] ?? 'Love is a game that two can play and both win.',
       author: json['author'],
       category: json['category'],
       isLiked: false,
       imgKey: GlobalKey(),
-      img: "asset/project/${json['category']}/image${index%10==0?10:index%10}.jpeg",
+      img:
+          "asset/project/${json['category']}/image${index % 10 == 0 ? 10 : index % 10}.jpeg",
       index: index,
     );
   }
