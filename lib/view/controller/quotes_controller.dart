@@ -57,7 +57,7 @@ class QuotesController extends GetxController {
     quotesRandomList.refresh();
     Random random = Random();
     Set<int> selectedIndices = {};
-    while (selectedIndices.length < 20) {
+    while (selectedIndices.length < 16) {
       selectedIndices.add(random.nextInt(quotesList.length));
     }
     quotesRandomList.value =
@@ -70,16 +70,17 @@ class QuotesController extends GetxController {
     quotesList[quote.index].isLiked = quote.isLiked;
 
     if (quote.isLiked) {
-      // quotesFavoriteList.add(quote);
       DatabaseService.databaseService.insertData(
           quotesList[quote.index].quote,
           quotesList[quote.index].author,
           quotesList[quote.index].isLiked,
-          quotesList[quote.index].category);
+          quotesList[quote.index].category,
+          quotesList[quote.index].img,
+      );
     } else {
-      // quotesFavoriteList.remove(quote);
       DatabaseService.databaseService.removeData(quote.quote);
     }
+    readDatabase();
 
     quotesRandomList.refresh();
     quotesList.refresh();
@@ -104,5 +105,6 @@ class QuotesController extends GetxController {
         .entries
         .map((e) => QuotesModal(e.value, e.key))
         .toList();
+    quotesFavoriteList.refresh();
   }
 }

@@ -28,7 +28,8 @@ class DatabaseService {
             quotes TEXT,
             author TEXT,
             isLike INTEGER,
-            category TEXT
+            category TEXT,
+            image TEXT
          )''';
         db.execute(sql);
       },
@@ -38,11 +39,11 @@ class DatabaseService {
   }
 
   Future<void> insertData(
-      String? quotes, String? author, bool? isLike, String? category) async {
+      String? quotes, String? author, bool? isLike, String? category,String? image) async {
     final db = await database;
     String sql =
-        'INSERT INTO favorite (quotes,author,isLike,category) VALUES(?,?,?,?)';
-    List arg = [quotes, author, isLike, category];
+        'INSERT INTO favorite (quotes,author,isLike,category) VALUES(?,?,?,?,?)';
+    List arg = [quotes, author, isLike, category,image];
     await db!.rawInsert(sql, arg);
   }
 

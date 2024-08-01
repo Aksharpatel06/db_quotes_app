@@ -22,35 +22,40 @@ class HomeScreen extends StatelessWidget {
     PageController pageController = PageController();
 
     return Scaffold(
-      floatingActionButton: SpeedDial(
-        animatedIcon: AnimatedIcons.menu_close,
-        shape: const CircleBorder(),
-        direction: SpeedDialDirection.down,
-        spacing: 12,
-        curve: Curves.easeInCubic,
-        animationDuration: const Duration(milliseconds: 500),
-        gradientBoxShape: BoxShape.circle,
-        children: [
-          SpeedDialChild(
-            shape: const CircleBorder(),
-            onTap: () {},
-            child: const Icon(Icons.favorite_border),
-          ),
-          SpeedDialChild(
-            shape: const CircleBorder(),
-            onTap: () {
-              Get.to(() => const CategoryScreen(),
-                  duration: const Duration(milliseconds: 500),
-                  transition: Transition.leftToRight);
-            },
-            child: const Icon(Icons.category),
-          ),
-          SpeedDialChild(
-            shape: const CircleBorder(),
-            onTap: () {},
-            child: const Icon(Icons.border_all),
-          ),
-        ],
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SpeedDial(
+          animatedIcon: AnimatedIcons.menu_close,
+          shape: const CircleBorder(),
+          direction: SpeedDialDirection.down,
+          spacing: 12,
+          curve: Curves.easeInCubic,
+          animationDuration: const Duration(milliseconds: 500),
+          gradientBoxShape: BoxShape.circle,
+          children: [
+            SpeedDialChild(
+              shape: const CircleBorder(),
+              onTap: () {},
+              child: const Icon(Icons.favorite_border),
+            ),
+            SpeedDialChild(
+              shape: const CircleBorder(),
+              onTap: () {
+                Get.to(() => const CategoryScreen(),
+                    duration: const Duration(milliseconds: 500),
+                    transition: Transition.leftToRight);
+              },
+              child: const Icon(Icons.category),
+            ),
+            SpeedDialChild(
+              shape: const CircleBorder(),
+              onTap: () {
+                quotesController.getRandomQuotes();
+              },
+              child: const Icon(Icons.refresh),
+            ),
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Obx(
@@ -79,19 +84,15 @@ class HomeScreen extends StatelessWidget {
                           height: double.infinity,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            image: quotesController
-                                        .quotesRandomList[index].category ==
-                                    "Kindness"
-                                ? null
-                                : DecorationImage(
+                            image: DecorationImage(
                                     image: AssetImage(quotesController
                                         .quotesRandomList[index].img),
                                     fit: BoxFit.cover),
-                            color: quotesController
-                                        .quotesRandomList[index].category ==
-                                    "Kindness"
-                                ? Colors.red
-                                : null,
+                            // color: quotesController
+                            //             .quotesRandomList[index].category ==
+                            //         "Kindness"
+                            //     ? Colors.red
+                            //     : null,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
@@ -202,15 +203,6 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        quotesController.getRandomQuotes();
-                      },
-                      child: const Icon(Icons.refresh),
-                    ),
-                  )
                 ],
               ),
       ),
