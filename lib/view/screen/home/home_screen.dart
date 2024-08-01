@@ -84,15 +84,19 @@ class HomeScreen extends StatelessWidget {
                           height: double.infinity,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            image: DecorationImage(
+                            image: quotesController
+                                        .quotesRandomList[index].category ==
+                                    "Kindness"
+                                ? null
+                                : DecorationImage(
                                     image: AssetImage(quotesController
                                         .quotesRandomList[index].img),
                                     fit: BoxFit.cover),
-                            // color: quotesController
-                            //             .quotesRandomList[index].category ==
-                            //         "Kindness"
-                            //     ? Colors.red
-                            //     : null,
+                            color: quotesController
+                                        .quotesRandomList[index].category ==
+                                    "Kindness"
+                                ? Colors.red
+                                : null,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
