@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:db_quotes_app/view/controller/quotes_controller.dart';
+import 'package:db_quotes_app/view/screen/category/category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -18,6 +19,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuotesController quotesController = Get.put(QuotesController());
+    PageController pageController = PageController();
+
     return Scaffold(
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
@@ -35,8 +38,12 @@ class HomeScreen extends StatelessWidget {
           ),
           SpeedDialChild(
             shape: const CircleBorder(),
-            onTap: () {},
-            child: const Icon(Icons.share),
+            onTap: () {
+              Get.to(() => const CategoryScreen(),
+                  duration: const Duration(milliseconds: 500),
+                  transition: Transition.leftToRight);
+            },
+            child: const Icon(Icons.category),
           ),
           SpeedDialChild(
             shape: const CircleBorder(),
@@ -47,141 +54,165 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Obx(
-            () => quotesController.quotesRandomList.isEmpty
+        () => quotesController.quotesRandomList.isEmpty
             ? const Center(
-          child: CircularProgressIndicator(),
-        )
+                child: CircularProgressIndicator(),
+              )
             : Stack(
-          children: [
-            PageView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: quotesController.quotesRandomList.length,
-              itemBuilder: (context, index) {
-                Random random = Random();
-                int randomNumber = random.nextInt(10) + 1;
-                quotesController.changeIndex(index);
-                return RepaintBoundary(
-                  key: quotesController.quotesRandomList[index].imgKey,
-                  child: Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                              'asset/project/${quotesController.quotesRandomList[index].category}/image$randomNumber.jpeg'),
-                          fit: BoxFit.cover),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          StrokeText(
-                            text: quotesController
-                                .quotesRandomList[index].quote,
-                            strokeColor: Colors.black,
-                            textStyle: const TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          StrokeText(
-                            text:
-                            "- ${quotesController.quotesRandomList[index].author}",
-                            strokeColor: Colors.black,
-                            textStyle: const TextStyle(
-                                fontSize: 22, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            Positioned(
-              bottom: 50, // Adjust this value as needed
-              left: 100,
-              child: Row(
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      quotesController.favoriteQuotes();
+                  PageView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: quotesController.quotesRandomList.length,
+                    controller: pageController,
+                    onPageChanged: (index) {
+                      quotesController.changeIndex(index);
                     },
-                    icon: Icon(
-                      quotesController
-                          .quotesRandomList[
-                      quotesController.screenIndex.value]
-                          .isLiked
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      size: 45,
-                      color: quotesController
-                          .quotesRandomList[
-                      quotesController.screenIndex.value]
-                          .isLiked
-                          ? Colors.redAccent
-                          : Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  IconButton(
-                    onPressed: () async {
-                      final boundary = quotesController
-                          .quotesRandomList[
-                      quotesController.screenIndex.value]
-                          .imgKey
-                          .currentContext!
-                          .findRenderObject() as RenderRepaintBoundary?;
-
-                      if (boundary != null) {
-                        ui.Image image = await boundary.toImage();
-
-                        ByteData? byteData = await image.toByteData(
-                            format: ui.ImageByteFormat.png);
-
-                        if (byteData != null) {
-                          final imgData = byteData.buffer.asUint8List();
-
-                          final directory =
-                          await getApplicationDocumentsDirectory();
-
-                          File fileImg = File(
-                              "${directory.path}/flutter/${DateTime.now().millisecondsSinceEpoch}.png");
-                          fileImg.createSync(recursive: true);
-
-                          fileImg.writeAsBytesSync(imgData);
-
-                          await ShareExtend.share(fileImg.path, 'image');
-                        }
-                      }
+                    itemBuilder: (context, index) {
+                      Random random = Random();
+                      int randomNumber = random.nextInt(10) + 1;
+                      print(quotesController.quotesRandomList[index].img);
+                      print(
+                          'asset/project/${quotesController.quotesRandomList[index].category}/image$randomNumber.jpeg');
+                      return RepaintBoundary(
+                        key: quotesController.quotesRandomList[index].imgKey,
+                        child: Container(
+                          height: double.infinity,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: quotesController
+                                        .quotesRandomList[index].category ==
+                                    "Kindness"
+                                ? null
+                                : DecorationImage(
+                                    image: AssetImage(quotesController
+                                        .quotesRandomList[index].img),
+                                    fit: BoxFit.cover),
+                            color: quotesController
+                                        .quotesRandomList[index].category ==
+                                    "Kindness"
+                                ? Colors.red
+                                : null,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                StrokeText(
+                                  text: quotesController
+                                      .quotesRandomList[index].quote,
+                                  strokeColor: Colors.black,
+                                  textStyle: const TextStyle(
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                StrokeText(
+                                  text:
+                                      "- ${quotesController.quotesRandomList[index].author}",
+                                  strokeColor: Colors.black,
+                                  textStyle: const TextStyle(
+                                      fontSize: 22, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
                     },
-                    icon: const Icon(
-                      Icons.ios_share,
-                      size: 45,
+                  ),
+                  Positioned(
+                    bottom: 50, // Adjust this value as needed
+                    left: 100,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            quotesController.favoriteQuotes();
+                          },
+                          icon: Icon(
+                            quotesController
+                                    .quotesRandomList[
+                                        quotesController.screenIndex.value]
+                                    .isLiked
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            size: 45,
+                            color: quotesController
+                                    .quotesRandomList[
+                                        quotesController.screenIndex.value]
+                                    .isLiked
+                                ? Colors.redAccent
+                                : Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            final boundary = quotesController
+                                .quotesRandomList[
+                                    quotesController.screenIndex.value]
+                                .imgKey
+                                .currentContext!
+                                .findRenderObject() as RenderRepaintBoundary?;
+
+                            if (boundary != null) {
+                              ui.Image image = await boundary.toImage();
+
+                              ByteData? byteData = await image.toByteData(
+                                  format: ui.ImageByteFormat.png);
+
+                              if (byteData != null) {
+                                final imgData = byteData.buffer.asUint8List();
+
+                                final directory =
+                                    await getApplicationDocumentsDirectory();
+
+                                File fileImg = File(
+                                    "${directory.path}/flutter/${DateTime.now().millisecondsSinceEpoch}.png");
+                                fileImg.createSync(recursive: true);
+
+                                fileImg.writeAsBytesSync(imgData);
+
+                                await ShareExtend.share(fileImg.path, 'image');
+                              }
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.ios_share,
+                            size: 45,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.collections,
+                            size: 45,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.collections,
-                      size: 45,
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        quotesController.getRandomQuotes();
+                      },
+                      child: const Icon(Icons.refresh),
                     ),
-                  ),
+                  )
                 ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 
 class QuotesModal {
   String quote, author, category;
   int  index;
   bool isLiked;
+  String img;
   GlobalKey imgKey;
 
   QuotesModal._({
@@ -12,6 +14,7 @@ class QuotesModal {
     required this.category,
     required this.isLiked,
     required this.imgKey,
+    required this.img,
     required this.index,
   });
 
@@ -22,6 +25,7 @@ class QuotesModal {
       category: json['category'],
       isLiked: false,
       imgKey: GlobalKey(),
+      img: "asset/project/${json['category']}/image${index%10==0?10:index%10}.jpeg",
       index: index,
     );
   }
