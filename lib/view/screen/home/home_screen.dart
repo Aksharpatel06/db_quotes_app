@@ -131,82 +131,82 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  Positioned(
-                    bottom: 100, // Adjust this value as needed
-                    left: 100,
-                    child: Row(
-                      children: [
-                        IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () {
-                              quotesController.favoriteQuotes();
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 150.0),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                quotesController.favoriteQuotes();
+                              },
+                              icon: DecoratedIcon(
+                                icon: Icon(
+                                  quotesController
+                                          .quotesRandomList[
+                                              quotesController.screenIndex.value]
+                                          .isLiked
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: quotesController
+                                          .quotesRandomList[
+                                              quotesController.screenIndex.value]
+                                          .isLiked
+                                      ? Colors.redAccent
+                                      : Colors.white,
+                                  size: 40,
+                                ),
+                                decoration: IconDecoration(
+                                    border: IconBorder(
+                                        color: Colors.black, width: 2)),
+                              )),
+                          IconButton(
+                            onPressed: () async {
+                              final boundary = quotesController
+                                  .quotesRandomList[
+                                      quotesController.screenIndex.value]
+                                  .imgKey
+                                  .currentContext!
+                                  .findRenderObject() as RenderRepaintBoundary?;
+
+                              if (boundary != null) {
+                                ui.Image image = await boundary.toImage();
+
+                                ByteData? byteData = await image.toByteData(
+                                    format: ui.ImageByteFormat.png);
+
+                                if (byteData != null) {
+                                  final imgData = byteData.buffer.asUint8List();
+
+                                  final directory =
+                                      await getApplicationDocumentsDirectory();
+
+                                  File fileImg = File(
+                                      "${directory.path}/flutter/${DateTime.now().millisecondsSinceEpoch}.png");
+                                  fileImg.createSync(recursive: true);
+
+                                  fileImg.writeAsBytesSync(imgData);
+
+                                  await ShareExtend.share(fileImg.path, 'image');
+                                }
+                              }
                             },
                             icon: DecoratedIcon(
                               icon: Icon(
-                                quotesController
-                                        .quotesRandomList[
-                                            quotesController.screenIndex.value]
-                                        .isLiked
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: quotesController
-                                        .quotesRandomList[
-                                            quotesController.screenIndex.value]
-                                        .isLiked
-                                    ? Colors.redAccent
-                                    : Colors.white,
+                                Icons.share,
+                                color: Colors.white,
                                 size: 40,
                               ),
                               decoration: IconDecoration(
-                                  border: IconBorder(
-                                      color: Colors.black, width: 2)),
-                            )),
-                        SizedBox(
-                          width: 100,
-                        ),
-                        IconButton(
-                          onPressed: () async {
-                            final boundary = quotesController
-                                .quotesRandomList[
-                                    quotesController.screenIndex.value]
-                                .imgKey
-                                .currentContext!
-                                .findRenderObject() as RenderRepaintBoundary?;
-
-                            if (boundary != null) {
-                              ui.Image image = await boundary.toImage();
-
-                              ByteData? byteData = await image.toByteData(
-                                  format: ui.ImageByteFormat.png);
-
-                              if (byteData != null) {
-                                final imgData = byteData.buffer.asUint8List();
-
-                                final directory =
-                                    await getApplicationDocumentsDirectory();
-
-                                File fileImg = File(
-                                    "${directory.path}/flutter/${DateTime.now().millisecondsSinceEpoch}.png");
-                                fileImg.createSync(recursive: true);
-
-                                fileImg.writeAsBytesSync(imgData);
-
-                                await ShareExtend.share(fileImg.path, 'image');
-                              }
-                            }
-                          },
-                          icon: DecoratedIcon(
-                            icon: Icon(
-                              Icons.share,
-                              color: Colors.white,
-                              size: 40,
+                                  border:
+                                      IconBorder(color: Colors.black, width: 2)),
                             ),
-                            decoration: IconDecoration(
-                                border:
-                                    IconBorder(color: Colors.black, width: 2)),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
