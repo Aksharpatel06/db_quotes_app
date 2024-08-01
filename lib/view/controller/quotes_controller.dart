@@ -76,11 +76,13 @@ class QuotesController extends GetxController {
           quotesList[quote.index].isLiked,
           quotesList[quote.index].category,
           quotesList[quote.index].img,
+
       );
     } else {
       DatabaseService.databaseService.removeData(quote.quote);
     }
     readDatabase();
+    print(quotesFavoriteList);
 
     quotesRandomList.refresh();
     quotesList.refresh();

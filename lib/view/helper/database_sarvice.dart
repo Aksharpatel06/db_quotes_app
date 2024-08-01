@@ -42,7 +42,7 @@ class DatabaseService {
       String? quotes, String? author, bool? isLike, String? category,String? image) async {
     final db = await database;
     String sql =
-        'INSERT INTO favorite (quotes,author,isLike,category) VALUES(?,?,?,?,?)';
+        'INSERT INTO favorite (quotes,author,isLike,category,image) VALUES(?,?,?,?,?)';
     List arg = [quotes, author, isLike, category,image];
     await db!.rawInsert(sql, arg);
   }

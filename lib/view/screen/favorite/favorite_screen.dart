@@ -82,32 +82,34 @@ class FavouriteQuoteScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            CupertinoButton(
-                              onPressed: () {
-                                quotesController.removeLike(index);
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    quotesController
-                                            .quotesRandomList[quotesController
-                                                .screenIndex.value]
-                                            .isLiked
-                                        ? Icons.favorite
-                                        : Icons.favorite_border,
-                                    color: quotesController
-                                            .quotesRandomList[quotesController
-                                                .screenIndex.value]
-                                            .isLiked
-                                        ? Colors.redAccent
-                                        : Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Text('Like',
-                                      style: TextStyle(color: Colors.white)),
-                                ],
+                            Obx(
+                              ()=> CupertinoButton(
+                                onPressed: () {
+                                  quotesController.removeLike(index);
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      quotesController
+                                              .quotesRandomList[quotesController
+                                                  .screenIndex.value]
+                                              .isLiked
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: quotesController
+                                              .quotesRandomList[quotesController
+                                                  .screenIndex.value]
+                                              .isLiked
+                                          ? Colors.redAccent
+                                          : Colors.white,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text('Like',
+                                        style: TextStyle(color: Colors.white)),
+                                  ],
+                                ),
                               ),
                             ),
                             CupertinoButton(
