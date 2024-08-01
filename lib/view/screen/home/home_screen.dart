@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
@@ -79,11 +78,6 @@ class HomeScreen extends StatelessWidget {
                       quotesController.changeIndex(index);
                     },
                     itemBuilder: (context, index) {
-                      Random random = Random();
-                      int randomNumber = random.nextInt(10) + 1;
-                      print(quotesController.quotesRandomList[index].img);
-                      print(
-                          'asset/project/${quotesController.quotesRandomList[index].category}/image$randomNumber.jpeg');
                       return RepaintBoundary(
                         key: quotesController.quotesRandomList[index].imgKey,
                         child: Container(

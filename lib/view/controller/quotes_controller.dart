@@ -107,4 +107,30 @@ class QuotesController extends GetxController {
         .toList();
     quotesFavoriteList.refresh();
   }
+
+  void removeLike(int index)
+  {
+    var quote = quotesFavoriteList[index];
+    quote.isLiked = !quote.isLiked;
+    quotesFavoriteList[index].isLiked = quote.isLiked;
+    quotesList[quote.index].isLiked = quote.isLiked;
+
+    if (quote.isLiked) {
+      DatabaseService.databaseService.insertData(
+        quotesList[quote.index].quote,
+        quotesList[quote.index].author,
+        quotesList[quote.index].isLiked,
+        quotesList[quote.index].category,
+        quotesList[quote.index].img,
+      );
+    } else {
+      DatabaseService.databaseService.removeData(quote.quote);
+    }
+    readDatabase();
+
+    quotesFavoriteList.refresh();
+    quotesRandomList.refresh();
+    quotesList.refresh();
+  }
+
 }
