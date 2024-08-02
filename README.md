@@ -86,6 +86,3 @@ Contributions are welcome! Please create an issue or submit a pull request.
 
 https://github.com/user-attachments/assets/9dca378e-f123-4c6c-b7f2-e285fc8c5ea1
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
