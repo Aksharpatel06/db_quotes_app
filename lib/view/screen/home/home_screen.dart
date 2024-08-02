@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                                 crossAxisCount: 3, childAspectRatio: 9 / 13),
                         itemBuilder: (context, index) => CupertinoButton(
                           onPressed: () {
-
+                            quotesController.changeImage(index);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

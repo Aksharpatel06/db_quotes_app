@@ -72,6 +72,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
+    - asset/splash/splash.png
     - asset/project/Kindness/
     - asset/project/Affirmation/
     - asset/project/Broken/
