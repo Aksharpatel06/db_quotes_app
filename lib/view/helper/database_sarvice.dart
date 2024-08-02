@@ -25,7 +25,7 @@ class DatabaseService {
         String sql = '''
             CREATE TABLE favorite (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            quotes TEXT,
+            quote TEXT,
             author TEXT,
             isLike INTEGER,
             category TEXT,
@@ -42,7 +42,7 @@ class DatabaseService {
       String? quotes, String? author, bool? isLike, String? category,String? image) async {
     final db = await database;
     String sql =
-        'INSERT INTO favorite (quotes,author,isLike,category,image) VALUES(?,?,?,?,?)';
+        'INSERT INTO favorite (quote,author,isLike,category,image) VALUES(?,?,?,?,?)';
     List arg = [quotes, author, isLike, category,image];
     await db!.rawInsert(sql, arg);
   }
@@ -58,7 +58,7 @@ class DatabaseService {
   Future<void> removeData(String quotes) async {
     final db = await database;
     String sql = '''
-    DELETE FROM favorite WHERE quotes = ?
+    DELETE FROM favorite WHERE quote = ?
     ''';
     await db!.rawDelete(sql, [quotes]);
   }
