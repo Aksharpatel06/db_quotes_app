@@ -24,7 +24,6 @@ class CategoryFavoriteScreen extends StatelessWidget {
         () => ListView.builder(
           itemCount: quotesController.categoryFavoriteList.length,
           itemBuilder: (context, index) {
-            print('hello');
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(

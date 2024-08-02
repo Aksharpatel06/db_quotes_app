@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:db_quotes_app/view/controller/quotes_controller.dart';
 import 'package:db_quotes_app/view/screen/category/category_screen.dart';
 import 'package:db_quotes_app/view/screen/favorite/category_favorite_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -58,6 +59,47 @@ class HomeScreen extends StatelessWidget {
                 quotesController.getRandomQuotes();
               },
               child: const Icon(Icons.refresh),
+            ),
+            SpeedDialChild(
+              shape: const CircleBorder(),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => SizedBox(
+                    height: 500,
+                    width: 500,
+                    child: Expanded(
+                      child: GridView.builder(
+                        padding: const EdgeInsets.all(10),
+                        itemCount: 10,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3, childAspectRatio: 9 / 13),
+                        itemBuilder: (context, index) => CupertinoButton(
+                          onPressed: () {
+
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 150,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          "asset/project/${quotesController.quotesRandomList[quotesController.screenIndex.value].category}/image${index + 1}.jpeg"),
+                                      fit: BoxFit.cover)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              child: const Icon(Icons.image),
             ),
           ],
         ),
@@ -145,20 +187,20 @@ class HomeScreen extends StatelessWidget {
                               icon: DecoratedIcon(
                                 icon: Icon(
                                   quotesController
-                                          .quotesRandomList[
-                                              quotesController.screenIndex.value]
+                                          .quotesRandomList[quotesController
+                                              .screenIndex.value]
                                           .isLiked
                                       ? Icons.favorite
                                       : Icons.favorite_border,
                                   color: quotesController
-                                          .quotesRandomList[
-                                              quotesController.screenIndex.value]
+                                          .quotesRandomList[quotesController
+                                              .screenIndex.value]
                                           .isLiked
                                       ? Colors.redAccent
                                       : Colors.white,
                                   size: 40,
                                 ),
-                                decoration: IconDecoration(
+                                decoration: const IconDecoration(
                                     border: IconBorder(
                                         color: Colors.black, width: 2)),
                               )),
@@ -189,19 +231,20 @@ class HomeScreen extends StatelessWidget {
 
                                   fileImg.writeAsBytesSync(imgData);
 
-                                  await ShareExtend.share(fileImg.path, 'image');
+                                  await ShareExtend.share(
+                                      fileImg.path, 'image');
                                 }
                               }
                             },
-                            icon: DecoratedIcon(
+                            icon: const DecoratedIcon(
                               icon: Icon(
                                 Icons.share,
                                 color: Colors.white,
                                 size: 40,
                               ),
                               decoration: IconDecoration(
-                                  border:
-                                      IconBorder(color: Colors.black, width: 2)),
+                                  border: IconBorder(
+                                      color: Colors.black, width: 2)),
                             ),
                           ),
                         ],
