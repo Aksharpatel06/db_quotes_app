@@ -1,19 +1,14 @@
-# db_quotes_app
+# Quotes App
 
-A new Flutter project.
+A simple and elegant quotes app built using Flutter, GetX, and SQFlite for local database management.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Display random quotes
+- Save favorite quotes
+- View all saved quotes
+- Smooth and responsive UI using GetX state management
+- Persistent storage with SQFlite
 
 ### Screenshorts
 
@@ -32,3 +27,65 @@ samples, guidance on mobile development, and a full API reference.
 ### video
 
 https://github.com/user-attachments/assets/9dca378e-f123-4c6c-b7f2-e285fc8c5ea1
+
+## Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/quotes_app.git
+    ```
+
+2. Change to the project directory:
+    ```bash
+    cd quotes_app
+    ```
+
+3. Get the dependencies:
+    ```bash
+    flutter pub get
+    ```
+
+4. Run the app:
+    ```bash
+    flutter run
+    ```
+
+## Dependencies
+
+- [Flutter](https://flutter.dev)
+- [GetX](https://pub.dev/packages/get)
+- [SQFlite](https://pub.dev/packages/sqflite)
+
+## Project Structure
+
+```
+quotes_app/
+|- lib/
+|  |- controllers/
+|  |- models/
+|  |- services/
+|  |- views/
+|  |- main.dart
+|- assets/
+|- pubspec.yaml
+|- README.md
+```
+
+- **controllers/**: Contains GetX controllers for state management.
+- **models/**: Contains data models.
+- **services/**: Contains services for data handling.
+- **views/**: Contains the UI of the app.
+
+## Usage
+
+- Open the app to view a random quote.
+- Tap the "Save" button to save a quote to the database.
+- Go to the "Favorites" screen to view all saved quotes.
+
+## Contributing
+
+Contributions are welcome! Please create an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
