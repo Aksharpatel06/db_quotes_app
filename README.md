@@ -1,4 +1,4 @@
-# Quotes App
+ok# Quotes App
 
 A simple and elegant quotes app built using Flutter, GetX, and SQFlite for local database management.
 
@@ -85,4 +85,3 @@ Contributions are welcome! Please create an issue or submit a pull request.
 ### video
 
 https://github.com/user-attachments/assets/9dca378e-f123-4c6c-b7f2-e285fc8c5ea1
-
