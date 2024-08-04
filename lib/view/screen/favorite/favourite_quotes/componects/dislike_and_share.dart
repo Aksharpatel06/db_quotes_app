@@ -27,7 +27,7 @@ Align dislikeAndShare(QuotesController quotesController, int index) {
               onPressed: () {
                 quotesController.removeLike(index);
               },
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(
                     Icons.favorite,
@@ -36,7 +36,7 @@ Align dislikeAndShare(QuotesController quotesController, int index) {
                   SizedBox(
                     width: 10,
                   ),
-                  const Text('Like', style: TextStyle(color: Colors.white)),
+                  Text('Like', style: TextStyle(color: Colors.white)),
                 ],
               ),
             ),
