@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../controller/quotes_controller.dart';
 import '../favourite_quotes/favorite_quotes_screen.dart';
+import 'componects/favourite_quotes_category.dart';
 
 class CategoryFavoriteScreen extends StatelessWidget {
   const CategoryFavoriteScreen({super.key});
@@ -24,30 +25,7 @@ class CategoryFavoriteScreen extends StatelessWidget {
         () => ListView.builder(
           itemCount: quotesController.categoryFavoriteList.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: ListTile(
-                  leading: const Icon(Icons.format_quote_rounded),
-                  trailing: IconButton(
-                      onPressed: () {
-                        quotesController.categoryFavoriteListAdd(
-                            quotesController.categoryFavoriteList[index]);
-
-                        Get.to(() => const FavouriteQuoteScreen(),
-                            transition: Transition.upToDown,
-                            duration: const Duration(milliseconds: 500));
-                      },
-                      icon: const Icon(Icons.navigate_next)),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(quotesController.categoryFavoriteList[index]),
-                    ],
-                  ),
-                ),
-              ),
-            );
+            return favoriteQuoteCategory(quotesController, index);
           },
         ),
       ),
