@@ -2,6 +2,8 @@ import 'package:db_quotes_app/view/controller/quotes_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'componect/quotes_category.dart';
+
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
 
@@ -21,24 +23,7 @@ class CategoryScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: quotesController.categoryList.length,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              child: ListTile(
-                leading: const Icon(Icons.format_quote_rounded),
-                trailing: IconButton(onPressed: () {
-                  quotesController.categoryListAdd(quotesController.categoryList[index]);
-                  Get.back();
-                },icon: const Icon(Icons.navigate_next)),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(quotesController.categoryList[index]),
-                  ],
-                ),
-              ),
-            ),
-          );
+          return quoteCategory(quotesController, index);
         },
       ),
     );
