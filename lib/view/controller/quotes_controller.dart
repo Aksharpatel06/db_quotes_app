@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:db_quotes_app/view/helper/api_sarvice.dart';
-import 'package:db_quotes_app/view/helper/database_sarvice.dart';
+import 'package:db_quotes_app/view/helper/api/api_sarvice.dart';
+import 'package:db_quotes_app/view/helper/database/database_sarvice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
