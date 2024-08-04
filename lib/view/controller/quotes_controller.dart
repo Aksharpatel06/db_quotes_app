@@ -143,8 +143,17 @@ class QuotesController extends GetxController {
       if (quotes.quote == quote.quote) {
         quotes.isLiked = quote.isLiked;
         DatabaseService.databaseService.removeData(quote.quote);
+        categoryFavoriteDetailsList.removeAt(index);
       }
     }
+
+    for (var quotes in quotesRandomList) {
+      if (quotes.quote == quote.quote) {
+        quotes.isLiked = false;
+        print(quotes.quote);
+      }
+    }
+    update();
 
     readDatabase();
 

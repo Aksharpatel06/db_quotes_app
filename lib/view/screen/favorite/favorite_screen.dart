@@ -99,24 +99,22 @@ class FavouriteQuoteScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Obx(
-                              () => CupertinoButton(
-                                onPressed: () {
-                                  quotesController.removeLike(index);
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.favorite,
-                                      color: Colors.redAccent,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Text('Like',
-                                        style: TextStyle(color: Colors.white)),
-                                  ],
-                                ),
+                            CupertinoButton(
+                              onPressed: () {
+                                quotesController.removeLike(index);
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite,
+                                    color: Colors.redAccent,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Text('Like',
+                                      style: TextStyle(color: Colors.white)),
+                                ],
                               ),
                             ),
                             CupertinoButton(
@@ -166,6 +164,7 @@ class FavouriteQuoteScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
+
                           ],
                         ),
                       ),
