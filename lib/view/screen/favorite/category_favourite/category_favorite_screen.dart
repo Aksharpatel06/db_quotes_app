@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/quotes_controller.dart';
-import '../favourite_quotes/favorite_quotes_screen.dart';
 import 'componects/favourite_quotes_category.dart';
 
 class CategoryFavoriteScreen extends StatelessWidget {
