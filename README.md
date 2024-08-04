@@ -1,4 +1,4 @@
-ok# Quotes App
+# Quotes App
 
 A simple and elegant quotes app built using Flutter, GetX, and SQFlite for local database management.
 
