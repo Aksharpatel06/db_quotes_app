@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../../controller/quotes_controller.dart';
 import 'componects/dislike_and_share.dart';
 import 'componects/favorite_quotes_author.dart';
