@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/quotes_controller.dart';
-import 'favorite_quotes_screen.dart';
+import '../../../controller/quotes_controller.dart';
+import '../favourite_quotes/favorite_quotes_screen.dart';
 
 class CategoryFavoriteScreen extends StatelessWidget {
   const CategoryFavoriteScreen({super.key});

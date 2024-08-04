@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../controller/quotes_controller.dart';
 import '../../category/category_screen.dart';
-import '../../favorite/category_favorite_screen.dart';
+import '../../favorite/category_favourite/category_favorite_screen.dart';
 
 Padding floatingTopButton(QuotesController quotesController, BuildContext context) {
   return Padding(

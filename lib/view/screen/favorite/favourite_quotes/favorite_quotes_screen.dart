@@ -10,7 +10,7 @@ import 'package:share_extend/share_extend.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 
-import '../../controller/quotes_controller.dart';
+import '../../../controller/quotes_controller.dart';
 
 class FavouriteQuoteScreen extends StatelessWidget {
   const FavouriteQuoteScreen({super.key});
