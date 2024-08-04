@@ -8,9 +8,14 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 5),  () {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen(),));
-    },);
+    Timer(
+      const Duration(seconds: 5),
+      () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ));
+      },
+    );
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
